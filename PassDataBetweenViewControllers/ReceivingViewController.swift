@@ -55,6 +55,7 @@ class ReceivingViewController: UIViewController {
     
     @objc private func didTapPopupButton() {
         let sendingVC = SendingViewController()
+        // MARK: !! SendingViewController에 선언된 delegate를 self(ReceivingViewController)로 설정합니다. !!
         sendingVC.delegate = self
         
         sendingVC.modalPresentationStyle = .pageSheet
@@ -65,7 +66,13 @@ class ReceivingViewController: UIViewController {
     
 }
 
-extension ReceivingViewController: DataDelegate {
+extension ReceivingViewController: DataDelegate { // DataDelegate를 implementation 해줍니다.
+    /*
+     - SendingViewController에서 delegate가 위임을 하면 해당 내용을 ReceivingViewController가 구현합니다.
+     - 이 프로젝트에서는 SendingViewController.swift의
+     delegate?.sendData(data: dataTextField.text ?? "Nothing left to say")
+     함수가 호출되었을 때 입니다.
+     */
     func sendData(data: String) {
         dataLabel.text = "Received data: \(data)"
     }

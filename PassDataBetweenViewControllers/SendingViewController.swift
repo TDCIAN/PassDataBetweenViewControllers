@@ -7,12 +7,14 @@
 
 import UIKit
 
+// 데이터를 전달할 Delegate 프로토콜을 정의합니다.
 protocol DataDelegate: AnyObject {
     func sendData(data: String)
 }
 
 class SendingViewController: UIViewController {
     
+    // Delegate를 선언해줍니다.
     weak var delegate: DataDelegate?
     
     private lazy var dataTextField: UITextField = {
@@ -61,6 +63,7 @@ class SendingViewController: UIViewController {
     }
         
     @objc private func didTapSendButton() {
+        // 텍스트필드에 입력된 내용이 delegate를 통해 ReceivingViewController로 전달되게 합니다.
         delegate?.sendData(data: dataTextField.text ?? "Nothing left to say")
         dismiss(animated: true)
     }
